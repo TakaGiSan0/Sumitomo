@@ -23,7 +23,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 Route::get('login', [LoginController::class, 'index'])->name('login');
-Route::post('login', [LoginController::class, 'proses_login'])->name('proses_login');
+Route::post('proses_login', [LoginController::class, 'proses_login'])->name('proses_login');
 
 
 // metode nya get lalu masukkan namespace AuthController 

@@ -19,17 +19,23 @@
         /* Ensures the space between the text and the arrow */
         align-items: center;
     }
-    .hs-dropdown-menu {
-    position: absolute;
-    top: calc(50% + 0.5rem); /* Mengatur jarak antara tombol dan dropdown */
-    right: 0;
-    left: 0; /* Mengatur posisi horizontal dropdown */
-    z-index: 10; /* Atur z-index agar dropdown muncul di atas elemen lain */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Animasi transisi */
-    min-width: 60px; /* Atur lebar minimum dropdown */
-    padding: 0.5rem; /* Ruang dalam dropdown */
-}
 
+    .hs-dropdown-menu {
+        position: absolute;
+        top: calc(50% + 0.5rem);
+        /* Mengatur jarak antara tombol dan dropdown */
+        right: 0;
+        left: 0;
+        /* Mengatur posisi horizontal dropdown */
+        z-index: 10;
+        /* Atur z-index agar dropdown muncul di atas elemen lain */
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        /* Animasi transisi */
+        min-width: 60px;
+        /* Atur lebar minimum dropdown */
+        padding: 0.5rem;
+        /* Ruang dalam dropdown */
+    }
 </style>
 
 <body class="bg-[#607FBB]">
@@ -52,47 +58,53 @@
     <div class="flex h-screen">
         <div class="bg-white w-[18rem] h-full">
             {{-- Sidebar --}}
-            <div class=" flex items-center justify-center px-4">
-                <img class="w-7 " src={{ url('/img/headset1.png') }} alt="PBL">
-                <div class="font-inter text-[#18517C] text-xl w-1/2 p-4 text-center ">Operator</div>
+            <div class="flex items-center justify-center px-4 py-4">
+                <img class="w-7" src="{{ url('/img/headset1.png') }}" alt="Operator Icon">
+                <div class="font-inter text-[#18517C] text-xl w-1/2 p-4 text-center">Operator</div>
             </div>
-            <hr class="w-48 h-px mx-auto border-0 bg-[#18517C]">
-            <div class=" flex items-center justify-center px-4">
-                <div class="bg-red-500 rounded-full w-7 h-7">
-                    <img class="w-5 ml-1 mt-1" src={{ url('/img/robot-removebg.png') }} alt="PBL">
-                </div>
-                <div class="hs-dropdown [--trigger:hover] relative inline-flex">
-                    <button id="hs-dropdown-hover-event" type="button"
-                        class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-2xl font-medium rounded-lg text-black disabled:pointer-events-none">
-                        Actions
-                        <svg class="hs-dropdown-open:rotate-180 size-7" xmlns="http://www.w3.org/2000/svg"
-                            width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m6 9 6 6 6-6" />
-                        </svg>
-                    </button>
-                    <div class="hs-dropdown-menu transition-opacity duration-300 opacity-0 hidden min-w-60 m"
-                        aria-labelledby="hs-dropdown-hover-event" id="dropdown-menu">
-                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-[#18517C]  focus:outline-none "
-                            href="#">
-                            Newsletter
-                        </a>
-                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-[#18517C]  focus:outline-none "
-                            href="#">
-                            Purchases
-                        </a>
-                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-[#18517C]  focus:outline-none "
-                            href="#">
-                            Downloads
-                        </a>
-                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-[#18517C]  focus:outline-none "
-                            href="#">
-                            Team Account
-                        </a>
+              <hr class="w-48 h-px mx-auto border-0 bg-[#18517C]">
+
+        
+            @foreach ($robot as $r)
+                <div class="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors">
+
+                 
+                    <div class="rounded-full w-10 h-10 flex items-center justify-center mr-3"
+                        style="background-color: {{ $r->warna ?? '#CCCCCC' }}">
+                        <img class="w-6" src="{{ url('/img/robot-removebg.png') }}" alt="Robot">
+                    </div>
+
+                    <div class="flex-1">
+                        <div class="relative group w-full">
+                            <button type="button"
+                                class="py-2 px-2 inline-flex items-center justify-between w-full gap-x-2 text-lg font-medium text-[#18517C] hover:text-[#0d3a5c]">
+                                <span>{{ $r->nama }}</span>
+                                <svg class="group-hover:rotate-180 size-5 transition-transform"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            </button>
+                            <div
+                                class="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 
+                           transition-all duration-300
+                           min-w-60 bg-white shadow-lg rounded-lg mt-2 z-10">
+                                <div class="p-3 space-y-2">
+                                    <div class="text-sm text-gray-700">
+                                        <span class="font-semibold">Baterai: {{ $r->baterai }}</span> 
+                                    </div>
+                                    <div class="text-sm text-gray-700">
+                                        <span class="font-semibold">Posisi: {{ $r->nama_posisi }}</span>
+                                    </div>
+                                    <div class="text-sm text-gray-700">
+                                        <span class="font-semibold">Tipe: {{ $r->tipe }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-            </div>
+            @endforeach
         </div>
         {{-- MainBar --}}
         <div class="w-screen h-screen">
@@ -133,8 +145,8 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/preline@2.3.0/dist/preline.min.js"></script>
 </body>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dropdownToggle = document.getElementById('hs-dropdown-hover-event');

@@ -20,8 +20,13 @@
         <div class="w-1/2 h-auto bg-[#486FBC]" ></div>
 
 </nav>
-
-    <form action="/login" method="POST" class="bg-white w-[70%] h-auto p-7 rounded-xl mx-auto max-w-[1000px]">
+   
+      @error('loginGagal')
+        <div class="bg-red-500 text-white p-3 rounded-lg mb-5">
+          {{ $message }}
+        </div>
+      @enderror
+    <form action={{ route('proses_login') }} method="POST" class="bg-white w-[70%] h-auto p-7 rounded-xl mx-auto max-w-[1000px]">
       @csrf
         <div class="mx-auto max-w-[17rem]">
             <h1 class="text-center text-5xl text-blue-900">Login</h1>

@@ -25,7 +25,7 @@ class LoginController extends Controller
     // Ambil data request username & password saja
     $credential = $request->only('username', 'password');
 
-    // Cek jika data username dan password valid (sesuai) dengan data
+
     if (Auth::attempt($credential)) {
       // Kalau berhasil simpan data user ya di variabel $user
       $user = Auth::user();
